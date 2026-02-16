@@ -258,6 +258,32 @@ require('lazy').setup({
   -- NOTE: Plugins can be added via a link or github org/name. To run setup automatically, use `opts = {}`
   { 'NMAC427/guess-indent.nvim', opts = {} },
 
+  -- Git interface for Neovim (Neogit)
+  {
+    'NeogitOrg/neogit',
+    dependencies = {
+      'nvim-lua/plenary.nvim',         -- required
+      'sindrets/diffview.nvim',        -- optional - Diff integration
+      'nvim-telescope/telescope.nvim', -- optional
+    },
+    config = function()
+      require('neogit').setup {
+        -- You can change the "kind" to 'floating' if you prefer a popup
+        kind = 'tab', 
+        integrations = {
+          diffview = true,
+        },
+      }
+      -- Set a keymap to open Neogit
+      vim.keymap.set('n', '<leader>ng', '<cmd>Neogit<cr>', { desc = '[N]eo[g]it' })
+    end,
+  },
+
+  -- Practice your motions!
+  {
+    'ThePrimeagen/vim-be-good',
+  },
+
   -- Alternatively, use `config = function() ... end` for full control over the configuration.
   -- If you prefer to call `setup` explicitly, use:
   --    {
